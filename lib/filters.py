@@ -1,24 +1,29 @@
-def get_energy_peaks (df):
+def get_energy_peaks(df):
     import pandas as pd
     from scipy.signal import find_peaks as fp
-    dfr=pd.DataFrame(index=df.index)
-    collector=[]
+    dfr = pd.DataFrame(index=df.index)
+    collector = []
     for i in df.index:
-        x=df.loc[i,:]
-        peaks, properties = fp(x, prominence=(20, None),distance=5,width=2)
+        x = df.loc[i, :]
+        peaks, properties = fp(x, prominence=(20, None), distance=5, width=2)
         collector.append(list(x.index[peaks]))
 
-    dfr['peak_energies[keV]']=collector
+    dfr['peak_energies[keV]'] = collector
     return dfr
 
-def separate_energy_peak(df,start,end):
-    from helpers import extract_between
-    runner=[]
+
+def separate_energy_peak(df, start, end):
+    from lib.reader import gather_files_regex
+    gather_files_regex('hello', r'nein')
+    from lib.helz import extract_between
+
+    runner = []
     for i in df.index:
-        runner.append(extract_between(df.loc[i,'peak_energies[keV]'],start,end))
-    colname='_'+str(start)+'-'+str(end)+'[keV]'
-    df[colname]=runner
-    return(df)
+        runner.append(extract_between(df.loc[i, 'peak_energies[keV]'], start, end))
+    colname = '_' + str(start) + '-' + str(end) + '[keV]'
+    df[colname] = runner
+    return (df)
+
 
 def sgolay2d(z, window_size, order, derivative=None):
     """
