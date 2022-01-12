@@ -6,6 +6,7 @@ def gather_files_regex(dir: str, regex) -> list:
     dir -- the directory
 
     regex -- A regular expression to match filenames
+
     '''
     #
     import re
@@ -20,3 +21,4 @@ def gather_files_regex(dir: str, regex) -> list:
                 data.append(b)
 
     return data
+

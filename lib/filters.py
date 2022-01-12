@@ -13,9 +13,8 @@ def get_energy_peaks(df):
 
 
 def separate_energy_peak(df, start, end):
-    from lib.reader import gather_files_regex
-    gather_files_regex('hello', r'nein')
-    from lib.helz import extract_between
+
+    from lib.helpers import extract_between
 
     runner = []
     for i in df.index:
